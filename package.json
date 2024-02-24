@@ -1,0 +1,64 @@
+{
+  "name": "@ysm/monorepo",
+  "private": true,
+  "packageManager": "yarn@3.1.1",
+  "version": "1.0.0",
+  "description": "모노레포",
+  "main": "index.js",
+  "author": "Sung-min Yu <yu9221@gmail.com>",
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "micro/*",
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "echo": "$ yarn <프로젝트명> <해당 프로젝트 package.json 파일 scripts 항목에 설정된 명령>",
+    "lint": "yarn workspaces run lint --color",
+    "typecheck": "yarn workspaces run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "turbo:build": "turbo build",
+    "turbo:dev": "turbo dev",
+    "turbo:lint": "turbo lint",
+    "packages:lint": "yarn workspaces --include '@ysm/*' run lint",
+    "packages:typecheck": "yarn workspaces --include '@ysm/*' run typecheck",
+    "nextjs12": "yarn workspace @ysm/nextjs12",
+    "vuejs-test": "yarn workspace @ysm/vuejs-test",
+    "server-graphql": "yarn workspace @ysm/server-graphql",
+    "cra-server": "yarn workspace @ysm/cra-server",
+    "cra-client": "yarn workspace @ysm/cra-client",
+    "vertical": "yarn workspace @ysm/vertical",
+    "local": "concurrently \"yarn server-graphql server\" \"yarn cra-server start\" \"yarn cra-client start\""
+  },
+  "dependencies": {
+    "@babel/core": "7.12.10",
+    "babel-plugin-module-resolver": "4.1.0",
+    "concurrently": "^7.4.0",
+    "cross-env": "7.0.3",
+    "dotenv": "^8.2.0",
+    "pm2": "^5.3.0",
+    "typescript": "4.1.3"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^13.4.19",
+    "@types/eslint-config-prettier": "^6.11.0",
+    "@types/eslint-plugin-prettier": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "4.11.1",
+    "@typescript-eslint/parser": "4.11.1",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.5.1",
+    "turbo": "^1.6.3"
+  },
+  "engines": {
+    "node": "16.14.2"
+  }
+}
