@@ -9,7 +9,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@ysm/design-system-ui": "*",
+    "@makestory/design-system-ui": "*",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.8.1",
     "@types/react": "^18.0.8",

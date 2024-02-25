@@ -1,0 +1,13 @@
+{
+  "name": "@makestory/vue-helper",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "browserslist": [
+    "> 1%",
+    "not dead"
+  ]
+}
