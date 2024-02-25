@@ -3,6 +3,7 @@
 Vue 스타일 가이드
 https://kr.vuejs.org/v2/style-guide/index.html
 */
+//import { mapGetters } from 'vuex';
 
 import AsyncComponent from './async-component';
 import CustomDirective from './custom-directive';
@@ -19,15 +20,22 @@ import Props from './props';
 import SingleFileComponent from './single-file-component.vue';
 import Slot from './slot';
 //import {} from './template';
+import Countdown from './countdown.vue';
+
 import { store as moduleStore } from './store/store';
 import { store as singleStore } from './vuex-store';
 import VuexHelper from './vuex-helper';
-//import { mapGetters } from 'vuex';
 
+/**
+ * 컴포넌트
+ */
 export const basicTest = {
   el: '#basic',
   template: `
     <div class="group-line">
+      <div>
+        <countdown></countdown>
+      </div>
       <div>
         <h1>Lifecycle 테스트</h1>
         <lifecycle-test></lifecycle-test>
@@ -130,6 +138,7 @@ export const basicTest = {
     'async-component': AsyncComponent,
     'dynamic-component': DynamicComponent,
     'mixin-component': Mixin,
+    countdown: Countdown,
     'vuex-helper': VuexHelper,
   },
   created() {
@@ -145,6 +154,9 @@ export const basicTest = {
   },
 };
 
+/**
+ * 컴포넌트
+ */
 export const vuexTest = {
   el: '#vuex-store',
   template: `

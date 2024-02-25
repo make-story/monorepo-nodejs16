@@ -1,12 +1,3 @@
-# Vue 개발을 도와주는 Helper
-
-## countdown-helper
-
-카운트다운 컴포넌트
-
-Example
-
-```vue
 <template>
   <div>
     <countdown-helper
@@ -65,4 +56,3 @@ export default {
 </script>
 
 <style lang="scss" scoped></style>
-```

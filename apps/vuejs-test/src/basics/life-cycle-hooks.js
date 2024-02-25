@@ -47,4 +47,9 @@ export default {
     // 서버 렌더링시 호출되지 않는다.
     console.log('소멸 후 이벤트');
   },
+  methods: {
+    clickButton() {
+      // ...
+    },
+  },
 };

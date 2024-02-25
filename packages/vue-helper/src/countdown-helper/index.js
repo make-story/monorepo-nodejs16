@@ -16,7 +16,12 @@ const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
 export default Vue.component('countdown-helper', {
   name: 'CountdownHelper',
+
   props: {
+    tag: {
+      type: String,
+      default: 'span',
+    },
     serverTimestamp: {
       type: Number,
       default: 0,
@@ -26,8 +31,14 @@ export default Vue.component('countdown-helper', {
       default: 0,
       validator: value => value >= 0,
     },
+    transform: {
+      type: Function,
+      default: props => props,
+    },
   },
+
   emits: [EVENT_END, EVENT_START],
+
   data() {
     return {
       isCounting: false,
@@ -39,6 +50,7 @@ export default Vue.component('countdown-helper', {
       correctionTimestamp: 0,
     };
   },
+
   computed: {
     days() {
       return Math.floor(this.totalMilliseconds / MILLISECONDS_DAY);
@@ -186,9 +198,11 @@ export default Vue.component('countdown-helper', {
       return num.toString().padStart(2, '0');
     },
   },
+
   render(createElement) {
     // 하위컴포넌트 <slot name="default"></slot>
     // 상위컴포넌트 v-slot:default=""
+    // TODO: this.$scopedSlots 유효성검사 필요! v-slot 속성이 없을 수 있음
     return createElement(this.tag, [
       this.$scopedSlots.default(
         this.transform({
