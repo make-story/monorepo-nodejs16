@@ -1,8 +1,11 @@
 {
   "name": "@makestory/vue-helper",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "index.js",
+  "files": [
+    "*"
+  ],
   "scripts": {},
   "dependencies": {},
   "devDependencies": {},
