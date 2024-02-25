@@ -1,12 +1,13 @@
-# 자료
+# 모노레포
 
+기술자료  
 https://github.com/make-story/study
 
 # React CRA + Node.js 서버 + GraphQL 서버 테스트
 
-- /apps/cra-client  
-- /apps/cra-server  
-- /apps/server-graphq  
+- /apps/cra-client
+- /apps/cra-server
+- /apps/server-graphq
 
 ```json
 {
