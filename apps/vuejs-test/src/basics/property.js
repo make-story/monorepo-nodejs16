@@ -87,7 +87,7 @@ export default {
     },
   },
   // 렌더링을 다시 할 때마다 항상 함수를 실행
-  method: {},
+  methods: {},
   // 데이터 변경을 관찰하고 이에 반응
   watch: {
     length: function (newVal, oldVal) {

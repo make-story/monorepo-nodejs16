@@ -1,10 +1,15 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
+    <div v-if="toggleCheck">{{ toggleCheck }}</div>
+    <button @click="setToggle">Toggle</button>
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <div>
       <input type="file" id="input" />
-      <div id="previewing" style="width: 100px; height: 100px; border: 1px solid;"></div>
+      <div
+        id="previewing"
+        style="width: 100px; height: 100px; border: 1px solid"
+      ></div>
     </div>
   </div>
 </template>
@@ -23,7 +28,7 @@ function convertHeicToJpg() {
 
   console.log('fileName', fileName);
   if (fileNameExt === 'heic') {
-    const blob = input.files[0]; 
+    const blob = input.files[0];
     heic2any({
       blob: blob,
       toType: 'image/jpg',
@@ -32,7 +37,8 @@ function convertHeicToJpg() {
         // previewing the uploaded picture
         const url = URL.createObjectURL(resultBlob);
         console.log('url', url);
-        document.getElementById("previewing").innerHTML = `<a target="_blank" href="${url}"><img src="${url}"></a>`;
+        document.getElementById('previewing').innerHTML =
+          `<a target="_blank" href="${url}"><img src="${url}"></a>`;
         // adding converted picture to the original
         const fileInputElement = input;
         const container = new DataTransfer();
@@ -56,6 +62,16 @@ export default {
   components: {
     HelloWorld,
   },
+  data() {
+    return {
+      isToggle: true,
+    };
+  },
+  computed: {
+    toggleCheck() {
+      return this.isToggle;
+    },
+  },
   mounted() {
     console.log(this.$el);
     const $input = this.$el.querySelector('#input');
@@ -64,6 +80,11 @@ export default {
     /*$('#input').change(function () {
       convertHeicToJpg(this);
     });*/
+  },
+  methods: {
+    setToggle() {
+      this.isToggle = !this.isToggle;
+    },
   },
 };
 </script>
