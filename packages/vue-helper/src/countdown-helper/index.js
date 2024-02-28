@@ -18,19 +18,25 @@ export default Vue.component('countdown-helper', {
   name: 'CountdownHelper',
 
   props: {
+    // 감싸는 태그
     tag: {
       type: String,
       default: 'span',
     },
+    // 현재 시간 (서버 시간)
+    // 밀리 초
     serverTimestamp: {
       type: Number,
       default: 0,
     },
+    // 카운트다운 타겟 시간
+    // 밀리 초
     targetTimestamp: {
       type: Number,
       default: 0,
       validator: value => value >= 0,
     },
+    // 타임값 형태 수정 가능한 콜백
     transform: {
       type: Function,
       default: props => props,
@@ -97,6 +103,7 @@ export default Vue.component('countdown-helper', {
         this.isDeviceTime =
           !this.serverTimestamp ||
           Math.abs(this.serverTimestamp - this.correctionTimestamp) <= 60000; // 디바이스타임 사용가능 여부판단, 서버타임과 디바이스타임 시간차이 비교 (60000 밀리초 === 1 분)
+        // 서버시간이 디바이스 시간과 큰 차이가 없을 경우, 디바이스 시간 사용
         if (this.isDeviceTime) {
           this.endTime = this.correctionTimestamp + this.targetTimestamp;
         } else {
