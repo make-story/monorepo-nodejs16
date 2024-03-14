@@ -7,6 +7,7 @@ method, computed, watch 내용은
 //import Vue from 'vue';
 
 export default {
+  name: 'LifeCycle',
   template: `
 		<div>
       <p>Built-in Directives</p>

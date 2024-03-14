@@ -1,5 +1,5 @@
 <template>
-	<p>{{ greeting }} World!</p>
+  <p>{{ greeting }} World!</p>
 </template>
 
 <script>
@@ -21,17 +21,66 @@ https://vue-loader-v14.vuejs.org/kr/configurations/pre-processors.html
 
 // Webpack 또는 Browserify와 같은 빌드 도구를 이용해 .vue 확장자를 가진 싱글 파일 컴포넌트
 module.exports = {
-	data: function () {
-		return {
-			greeting: 'Hello'
-		}
-	}
-}
+  name: 'LifeCycle',
+  components: {},
+  props: {
+    num: {
+      type: Number,
+    },
+    str: {
+      type: String,
+      default: '안녕',
+      required: true,
+    },
+    obj: {
+      type: Object, // Object 타입의 경우, 함수 return 형태로 반환해야 한다!
+      default: () => {
+        return {
+          message: '안녕 객체',
+        };
+      },
+    },
+  },
+  data() {
+    return {
+      sitename: 'Vue Test',
+    };
+  },
+  computed: {
+    // 계산된 속성, 캐싱
+    reversedSitename: function () {
+      return this.sitename.split('').reverse().join('');
+    },
+  },
+  watch: {
+    // 데이터 변경을 관찰하고 이에 반응
+    sitename: function (newVal, oldVal) {
+      console.log(`이전 : ${oldVal}, 변경 : ${newVal}`);
+    },
+  },
+  created() {
+    // data 접근가능, 데이터 초기화, 비동기 데이터 호출 등
+    console.log('생성 후 이벤트');
+  },
+  mounted() {
+    // this.$el 접근가능, element 접근관련 로직 등
+    console.log('마운트 후 이벤트');
+  },
+  destroyed() {
+    // 서버 렌더링시 호출되지 않는다.
+    console.log('소멸 후 이벤트');
+  },
+  methods: {
+    clickButton() {
+      // ...
+    },
+  },
+};
 </script>
 
 <style scoped>
 p {
-	font-size: 2em;
-	text-align: center;
+  font-size: 2em;
+  text-align: center;
 }
 </style>
