@@ -37,14 +37,18 @@ app.use((request: Request, response: Response, next: NextFunction) => {
 });
 
 // API 처리 - GraphQL 서버 연결
-app.use('/api/v1', async (request: Request, response: Response, next: NextFunction) => {
-  console.log('request!!!!', request.baseUrl);
+app.use(
+  '/api/v1',
+  async (request: Request, response: Response, next: NextFunction) => {
+    console.log('request!!!!', request.baseUrl);
 
-  // axios
-  // ...
+    // monorepo-nodejs16.git/apps/server-graphql
+    // axios
+    // ...
 
-  return next();
-});
+    return next();
+  },
+);
 
 // 로컬환경 SPA HTML (CRA 서버 접근)
 app.use(
