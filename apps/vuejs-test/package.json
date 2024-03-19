@@ -9,7 +9,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "cross-env NODE_ENV=${NODE_ENV:=development} PORT=80 PORT_SSL=443 node --inspect=9191 server/main.js"
+    "dev": "cross-env NODE_ENV=${NODE_ENV:=development} PORT=8001 PORT_SSL=443 node --inspect=9191 server/main.js"
   },
   "dependencies": {
     "@makestory/vue-helper": "*",

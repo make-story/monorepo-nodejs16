@@ -8,8 +8,11 @@
  * $ vue inspect > output.js
  * $ vue inspect --mode production > output.prod.js
  */
+import path from 'path';
 //const { defineConfig } = require('@vue/cli-service');
 import { defineConfig } from '@vue/cli-service';
+
+const __dirname = path.resolve();
 
 export default defineConfig({
   // transpileDependencies
@@ -18,6 +21,13 @@ export default defineConfig({
   //
   lintOnSave: false,
   //
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src/'),
+      },
+    },
+  },
   chainWebpack: config => {
     // HtmlWebpackPlugin 옵션 중 'inject' 부분 설정
     config.plugin('html').tap(args => {

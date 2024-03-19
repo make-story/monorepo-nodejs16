@@ -19,6 +19,7 @@ export default {
   props: ['my-counter'],
   template: `
 		<div>
+      <!-- 자식 컴포넌트 //-->
 			<button v-on:click="childIncrementCounter1">자식으로 부터 증가</button>
 			<button v-on:click="childIncrementCounter2">자식으로 부터 증가(.sync)</button>
 		</div>

@@ -8,6 +8,7 @@ https://kr.vuejs.org/v2/style-guide/index.html
 import AsyncComponent from './async-component';
 import CustomDirective from './custom-directive';
 import CustomEvent from './custom-event';
+import ComponentEvent from './component-event';
 import Directive from './directive';
 import DynamicComponent from './dynamic-component';
 //import EventBinding from './event-binding';
@@ -62,6 +63,8 @@ export const basicTest = {
         <button v-on:click="incrementCounter">부모 컴포넌트에서 카운터 증가</button>
         <!-- 자식 컴포넌트로 부터 이벤트 수신 //-->
         <custom-event v-on:increment-me="incrementCounter" :my-counter.sync="counter"></custom-event>
+        <!-- 컴포넌트 이벤트 //-->
+        <component-event></component-event>
       </div>
       <div>
         <h1>Props 테스트</h1>
@@ -135,6 +138,7 @@ export const basicTest = {
     'slot-test': Slot,
     'custom-directive': CustomDirective,
     'custom-event': CustomEvent,
+    'component-event': ComponentEvent,
     'async-component': AsyncComponent,
     'dynamic-component': DynamicComponent,
     'mixin-component': Mixin,

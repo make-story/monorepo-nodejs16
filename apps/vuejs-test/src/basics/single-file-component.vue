@@ -1,5 +1,5 @@
 <template>
-  <p>{{ greeting }} World!</p>
+  <p>{{ sitename }} World!</p>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ module.exports = {
     str: {
       type: String,
       default: '안녕',
-      required: true,
+      required: false,
     },
     obj: {
       type: Object, // Object 타입의 경우, 함수 return 형태로 반환해야 한다!
