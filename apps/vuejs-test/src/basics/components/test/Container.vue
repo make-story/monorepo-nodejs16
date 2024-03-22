@@ -5,6 +5,7 @@
       <li><button @click="setCount">setCount</button></li>
       <li><button @click="setMessage">setMessage</button></li>
     </ul>
+    <p>{{ containerData }}</p>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ export default {
   data() {
     return {
       item: { count: 0, message: 'test', is: false },
+      containerData: '',
     };
   },
   computed: {},
@@ -43,8 +45,12 @@ export default {
         message: `test-${Math.random()}`,
       };
     },
-    onClick(data) {
-      console.log('Presentational 컴포넌트에서 넘겨준 데이터', data);
+    onClick(presentationalData) {
+      this.containerData = presentationalData;
+      console.log(
+        'Presentational 컴포넌트에서 넘겨준 데이터',
+        presentationalData,
+      );
     },
   },
 };
