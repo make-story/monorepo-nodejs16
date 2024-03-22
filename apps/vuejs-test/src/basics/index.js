@@ -18,10 +18,11 @@ import Mixin from './mixin-component';
 import Property from './property';
 import Props from './props';
 //import {} from './reactivity';
-import SingleFileComponent from './single-file-component.vue';
+import SingleFileComponent from './SingleFileComponent';
 import Slot from './slot';
 //import {} from './template';
-import Countdown from './countdown.vue';
+import Countdown from './components/countdown/Countdown';
+import Container from './components/test/Container';
 
 import { store as moduleStore } from './store/store';
 import { store as singleStore } from './vuex-store';
@@ -34,6 +35,9 @@ export const basicTest = {
   el: '#basic',
   template: `
     <div class="group-line">
+      <div>
+        <Container></Container>
+      </div>
       <div>
         <countdown></countdown>
       </div>
@@ -129,6 +133,7 @@ export const basicTest = {
     };
   },
   components: {
+    Container,
     'lifecycle-test': LifeCycle,
     'property-test': Property,
     'directive-test': Directive,
@@ -175,7 +180,7 @@ export const vuexTest = {
   `,
   // "store" 옵션을 사용하여 저장소를 제공하십시오.
   // 그러면 모든 하위 컴포넌트에 저장소 인스턴스가 삽입됩니다.
-  //store: singleStore,
+  store: singleStore,
   data() {
     return {
       header: 'Vuex App',
@@ -185,10 +190,10 @@ export const vuexTest = {
     // vuex 테스트
     welcome() {
       // store 직접 접근
-      //return singleStore.state.msg;
+      //return this.$store.state.msg;
 
       // getters 통해 접근
-      return singleStore.getters.msg;
+      return this.$store.getters.msg;
     },
     // vuex 테스트
     counter() {
@@ -196,7 +201,7 @@ export const vuexTest = {
       //return singleStore.state.count;
 
       // getters 통해 접근
-      return singleStore.getters.count;
+      return this.$store.getters.count;
     },
     // 또는 Vuex 헬퍼 사용
     /*...mapGetters([
@@ -207,10 +212,10 @@ export const vuexTest = {
     // vuex 테스트
     increment() {
       // Vuex increment 뮤테이션(store 의 mutations 에 위치한 것)을 트리거 합니다. - 동기적 방식
-      //store.commit('increment', 10);
+      //this.$store.commit('increment', 10);
 
       // increment 액션(store 의 actions 에 위치한 것)을 디스패치 합니다. - 비동기적 방식
-      store.dispatch('increment', 10);
+      this.$store.dispatch('increment', 10);
     },
   },
 };

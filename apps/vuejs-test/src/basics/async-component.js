@@ -14,7 +14,6 @@
 
 export default function (resolve /*, reject*/) {
   setTimeout(function () {
-    // 서버를 시뮬레이션해서 1,000ms 마다 작동하는 타임아웃입니다.
     resolve(
       /*컴포넌트를 파라미터로 반환*/ {
         template: `
