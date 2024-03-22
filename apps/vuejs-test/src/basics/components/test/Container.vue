@@ -1,11 +1,14 @@
 <template>
   <div>
-    <Presentational :item="item" :onClick="onClick"></Presentational>
+    <h2>Container</h2>
+    <p>{{ containerData }}</p>
+    <p>{{ JSON.stringify(item) }}</p>
     <ul>
       <li><button @click="setCount">setCount</button></li>
       <li><button @click="setMessage">setMessage</button></li>
     </ul>
-    <p>{{ containerData }}</p>
+    <h2>Presentational</h2>
+    <Presentational :item="item" :onClick="onClick"></Presentational>
   </div>
 </template>
 

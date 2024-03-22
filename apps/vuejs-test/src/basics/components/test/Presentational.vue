@@ -3,6 +3,11 @@
     {{ JSON.stringify(computedItem) }}
     <ul>
       <li><button @click="onClickContainer">onClickContainer</button></li>
+      <li>
+        <button @click="onClickContainerDataChange">
+          onClickContainerDataChange
+        </button>
+      </li>
     </ul>
   </div>
 </template>
@@ -43,6 +48,10 @@ export default {
     // 상위 컴포넌트에서 함수를 props 로 넘겨주고, 하위 컴포넌트에서 호출하여 데이터 전달되는지 여부
     onClickContainer() {
       this.onClick('컨테이너야 데이터 받아라!');
+    },
+    // props 로 받은 객체타입 데이터 변경시, 상위 컴포넌트에도 반영되는지 여부
+    onClickContainerDataChange() {
+      this.item.count = this.item.count + 1;
     },
   },
 };
