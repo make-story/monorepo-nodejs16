@@ -9,7 +9,7 @@ import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Global, css } from '@emotion/react';
-import { SessionProvider, signIn } from 'next-auth/react';
+//import { SessionProvider, signIn } from 'next-auth/react';
 
 import { globalStyle } from '@/common/styles/global';
 import { wrapper } from '@/store';
@@ -18,7 +18,6 @@ import { useApollo } from '@/common/apollo/client/apolloClient';
 // https://nextjs.org/docs/basic-features/typescript#custom-app
 const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   Component,
-  pageProps: { session, ...pageProps },
   ...rest
 }: AppProps) => {
   const isServer = typeof window === 'undefined';
@@ -26,18 +25,18 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   // https://velog.io/@mangojang/error-next-redux-wrapper-%EC%82%AC%EC%9A%A9-%EC%8B%9C-Use-createWrapper
   const { store, props } = wrapper.useWrappedStore(rest);
   // https://blog.soaresdev.com/configurando-apollo-client-no-nextjs/
-  const apolloClient = useApollo(pageProps);
+  const apolloClient = useApollo(rest.pageProps);
 
   /**
    * OAuth refresh token
    * FIXME: OAuth 토큰 재발급이 필요한가?
    * @see https://authjs.dev/guides/basics/refresh-token-rotation
    */
-  useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
+  /*useEffect(() => {
+    if (rest?.session?.error === 'RefreshAccessTokenError') {
       signIn(); // Force sign in to hopefully resolve error
     }
-  }, [session]);
+  }, [rest?.session]);*/
 
   return (
     <>
@@ -49,10 +48,10 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
             <>
               {/* apollo */}
               <ApolloProvider client={apolloClient}>
-                <SessionProvider session={session}>
-                  <Global styles={globalStyle} />
-                  <Component {...props.pageProps} />
-                </SessionProvider>
+                {/*<SessionProvider session={session}>*/}
+                <Global styles={globalStyle} />
+                <Component {...props.pageProps} />
+                {/*</SessionProvider>*/}
               </ApolloProvider>
             </>
           )}
