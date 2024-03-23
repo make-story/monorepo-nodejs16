@@ -24,12 +24,12 @@
     "turbo:lint": "turbo lint",
     "packages:lint": "yarn workspaces --include '@ysm/*' run lint",
     "packages:typecheck": "yarn workspaces --include '@ysm/*' run typecheck",
-    "nextjs12": "yarn workspace @ysm/nextjs12",
-    "vuejs-test": "yarn workspace @ysm/vuejs-test",
-    "server-graphql": "yarn workspace @ysm/server-graphql",
-    "cra-server": "yarn workspace @ysm/cra-server",
     "cra-client": "yarn workspace @ysm/cra-client",
-    "vertical": "yarn workspace @ysm/vertical",
+    "cra-server": "yarn workspace @ysm/cra-server",
+    "storybook": "yarn workspace @ysm/design-system-storybook",
+    "nextjs13": "yarn workspace @ysm/nextjs13",
+    "server-graphql": "yarn workspace @ysm/server-graphql",
+    "vuejs-test": "yarn workspace @ysm/vuejs-test",
     "local": "concurrently \"yarn server-graphql server\" \"yarn cra-server start\" \"yarn cra-client start\""
   },
   "dependencies": {
