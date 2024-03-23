@@ -22,8 +22,9 @@
 (7) nextjs.config.js의 `fallback`
 */
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { setCookie } from 'cookies-next';
+
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   let cookie = request.cookies.get('nextjs');

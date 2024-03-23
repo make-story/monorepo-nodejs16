@@ -26,7 +26,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   // https://velog.io/@mangojang/error-next-redux-wrapper-%EC%82%AC%EC%9A%A9-%EC%8B%9C-Use-createWrapper
   const { store, props } = wrapper.useWrappedStore(rest);
   // https://blog.soaresdev.com/configurando-apollo-client-no-nextjs/
-  const apolloClient = useApollo(rest);
+  const apolloClient = useApollo(pageProps);
 
   /**
    * OAuth refresh token

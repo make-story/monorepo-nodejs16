@@ -33,12 +33,8 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 /**
  * 새로운 apollo client 객체를 만들어 리턴해주는 역할을 수행
- *
- * 기존 코드 참고
- * webview.git/workspaces/client/src/configs/apolloLink.ts
- * webview.git/workspaces/client/src/index.tsx
  */
-export function createApolloClient(cookieOptions?: OptionsType) {
+export function createApolloClient() {
   // https://www.apollographql.com/docs/react/api/core/ApolloClient/
   return new ApolloClient({
     // https://www.apollographql.com/docs/react/caching/overview/
@@ -49,7 +45,7 @@ export function createApolloClient(cookieOptions?: OptionsType) {
     link: ApolloLink.from([
       //authLink(cookieOptions),
       //authErrorLink(cookieOptions),
-      httpLink(cookieOptions),
+      httpLink(),
     ]),
     defaultOptions: {
       watchQuery: {
@@ -69,11 +65,8 @@ export function createApolloClient(cookieOptions?: OptionsType) {
 /**
  * apollo client 를 초기화해주는 함수
  */
-export function initializeApollo(
-  initialState?: NormalizedCacheObject,
-  cookieOptions?: OptionsType,
-) {
-  const _apolloClient = apolloClient ?? createApolloClient(cookieOptions);
+export function initializeApollo(initialState?: NormalizedCacheObject | null) {
+  const _apolloClient = apolloClient ?? createApolloClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client,
   // the initial state gets hydrated here

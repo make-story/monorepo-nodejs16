@@ -16,7 +16,7 @@ export default async function getTokenApi(
   _token: Token,
   cookieOptions?: OptionsType,
 ) {
-  const apolloClient = initializeApollo(cookieOptions);
+  const apolloClient = initializeApollo();
 
   if (_token) {
     const token = clone(_token);

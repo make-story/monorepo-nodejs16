@@ -6,6 +6,8 @@ import {
   ThunkAction,
   combineReducers,
   AnyAction,
+  Reducer,
+  CombinedState,
 } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -33,6 +35,7 @@ import logger from 'redux-logger';
 import common from '@/common/store/index';
 import project1 from '@/project1/store/index';
 import project2 from '@/project2/store/index';
+import { PersistPartial } from 'redux-persist/lib/persistReducer';
 
 /**
  * 각각의 reducer 를 하나로 합쳐준다.
@@ -42,6 +45,11 @@ const reducer = combineReducers({
   //project1,
   project2,
 });
+export type TypedRootState = ReturnType<typeof reducer>;
+export type TypedReducer = Reducer<
+  CombinedState<TypedRootState> & PersistPartial,
+  AnyAction
+>;
 
 /**
  * HYDRATE
@@ -74,12 +82,12 @@ const rootReducer = (state: any, action: AnyAction) => {
  *
  * Redux Persist 관련 'src/pages/_app.tsx' 에 <PersistGate /> 설정 필요!
  */
-const makeConfiguredStore = (reducer: any) => {
+const makeConfiguredStore = (reducer: TypedReducer) => {
   // createStore deprecated -> redux/toolkit의 configureStore 사용 추천
   return configureStore({
-    devTools: true,
+    devTools: process.env.NODE_ENV !== 'production',
     reducer,
-    middleware: getDefaultMiddleware =>
+    middleware: (getDefaultMiddleware: any) =>
       // 기본 미들웨어 설정
       // 공식문서: https://redux-toolkit.js.org/api/getDefaultMiddleware
       // immutableCheck, serializableCheck 는 개발을 돕는 도구로, true로 설정하여도 production에서는 활성화 되지 않는다.
