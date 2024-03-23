@@ -43,3 +43,6 @@ public/docs
 
 # http test
 *.http
+
+#
+dist
