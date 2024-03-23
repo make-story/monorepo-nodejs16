@@ -47,8 +47,8 @@ export function createApolloClient(cookieOptions?: OptionsType) {
     }),
     ssrMode: typeof window === 'undefined',
     link: ApolloLink.from([
-      authLink(cookieOptions),
-      authErrorLink(cookieOptions),
+      //authLink(cookieOptions),
+      //authErrorLink(cookieOptions),
       httpLink(cookieOptions),
     ]),
     defaultOptions: {
@@ -70,8 +70,8 @@ export function createApolloClient(cookieOptions?: OptionsType) {
  * apollo client 를 초기화해주는 함수
  */
 export function initializeApollo(
-  cookieOptions?: OptionsType,
   initialState?: NormalizedCacheObject,
+  cookieOptions?: OptionsType,
 ) {
   const _apolloClient = apolloClient ?? createApolloClient(cookieOptions);
 
