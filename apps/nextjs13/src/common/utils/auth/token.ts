@@ -1,5 +1,6 @@
-import type { Token } from 'next-auth/jwt';
 import { clone } from 'lodash';
+
+import type { Token } from 'next-auth/jwt';
 import type { OptionsType } from 'cookies-next/lib/types';
 
 import { initializeApollo } from '@/common/apollo/client/apolloClient';

@@ -1,4 +1,5 @@
 import { setCookie, getCookie, deleteCookie } from 'cookies-next';
+
 import type { OptionsType } from 'cookies-next/lib/types';
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/common/constant/cookie';

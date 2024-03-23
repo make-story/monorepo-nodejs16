@@ -2,8 +2,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "_dist",
-    "noEmit": false
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "noEmit": false,
+    "paths": {
+      "#/*": ["./*"],
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["server.ts"]
+  "include": ["server.ts"],
+  "exclude": ["node_modules"]
 }
