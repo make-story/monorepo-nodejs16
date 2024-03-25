@@ -1,7 +1,10 @@
 <template>
   <div>
-    <p>{{ message }}</p>
-    <p>{{ JSON.stringify(computedItem) }}</p>
+    <p>message: {{ message }}</p>
+    <p>computedMessage: {{ computedMessage }}</p>
+    <p>computedItem: {{ JSON.stringify(computedItem) }}</p>
+    <p>computedItemCount: {{ computedItemCount }}</p>
+    <p>computedItemMessage: {{ computedItemMessage }}</p>
     <ul>
       <li><button @click="onClickContainer">onClickContainer</button></li>
       <li>
@@ -10,22 +13,16 @@
         </button>
       </li>
     </ul>
-    <h2>Item</h2>
-    <Item :item="item" :onClick="onClick" :message="message"></Item>
   </div>
 </template>
 
 <script>
 /**
- * 상위 컴포넌트와 하위 컴포넌트간 테스트를 위한 컴포넌트
+ * 최상위 컴포넌트, 상위 컴포넌트간 테스트
  */
-import Item from './Item';
-
 export default {
   name: 'Presentational',
-  components: {
-    Item,
-  },
+  components: {},
   props: {
     item: {
       type: Object,
@@ -46,9 +43,18 @@ export default {
     return {};
   },
   computed: {
-    // 객체(Object, {}) 값이 변경되면, 반영되는지 확인
+    // 객체(Object, {}) 값이 변경되면, 반영되는지 확인? 변경되면 반영된다!
     computedItem() {
       return this.item;
+    },
+    computedItemCount() {
+      return this.item?.count;
+    },
+    computedItemMessage() {
+      return this.item?.message;
+    },
+    computedMessage() {
+      return this.message;
     },
   },
   watch: {},
@@ -58,7 +64,7 @@ export default {
   methods: {
     // 상위 컴포넌트에서 함수를 props 로 넘겨주고, 하위 컴포넌트에서 호출하여, 상위컴포넌트로 데이터 전달되는지 여부? 변경된다!
     onClickContainer() {
-      this.onClick('컨테이너야 메시지(데이터) 받아라!');
+      this.onClick('최상위 컨테이너야 메시지(데이터) 받아라!');
     },
     // props 로 받은 객체타입 데이터 변경시, 상위 컴포넌트에도 반영되는지 여부? 변경된다!
     onClickContainerDataChange() {
