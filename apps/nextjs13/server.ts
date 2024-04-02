@@ -2,7 +2,7 @@
  * https://levelup.gitconnected.com/set-up-next-js-with-a-custom-express-server-typescript-9096d819da1c
  * https://github.com/troysandal/nextjs-typescript-express-boilerplate
  */
-// 'node:' Node.js 기본 내장 모듈
+// 'node:' Node.js 기본 내장 모듈 - v16.0.0 이상, v14.18.0 지원
 //import fs from 'node:fs';
 //import http from 'node:http';
 //import https from 'node:https';
