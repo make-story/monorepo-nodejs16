@@ -71,13 +71,13 @@ const actions = {
     console.debug('actions > test', context);
   },
   increment(
-    { state, commit, rootState },
+    { rootState, state, dispatch, commit, rootGetters, getters },
     payload /* dispatch 할 때 사용자 파라미터 */,
   ) {
     console.log('actions > increment', rootState);
   },
   initStore: (
-    { state, commit, rootState },
+    { rootState, state, dispatch, commit, rootGetters, getters },
     payload /* dispatch 할 때 사용자 파라미터 */,
   ) => {
     // 비동기 통신이 들어가는 곳
@@ -87,7 +87,7 @@ const actions = {
     }, 5000);
   },
   callMutation: (
-    { state, commit, rootState },
+    { rootState, state, dispatch, commit, rootGetters, getters },
     payload /* dispatch 할 때 사용자 파라미터 */,
   ) => {
     console.log('actions > callMutation', rootState);
