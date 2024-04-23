@@ -6,12 +6,19 @@
     <p>{{ message }}</p>
     <p>{{ JSON.stringify(item) }}</p>
     <ul>
-      <li><button @click="setChangeItemCount">setChangeItemCount</button></li>
       <li>
-        <button @click="setChangeItemMessage">setChangeItemMessage</button>
+        <button @click="onClickChangeItemCount">
+          onClickChangeItemCount (item 불변성 유지하며 값 변경)
+        </button>
       </li>
       <li>
-        <button @click="setChangeMessage">setChangeMessage</button>
+        <button @click="onClickChangeItemMessage">
+          onClickChangeItemMessage (item 불변성 유지하지 않으며 해당 필드 값만
+          변경)
+        </button>
+      </li>
+      <li>
+        <button @click="onClickChangeMessage">onClickChangeMessage</button>
       </li>
     </ul>
     <h2>Presentational</h2>
@@ -61,28 +68,29 @@ export default {
   destroyed() {},
   methods: {
     // Object 타입의 props 테스트: 상위 컴포넌트에서 item 객체의 프로퍼티 값을 변경했을 떄, 하위 컴포넌트에서도 변경된 값을 받을 수 있는지? 받을 수 있다! 같이 변경됨
-    setChangeItemCount() {
+    onClickChangeItemCount() {
+      // 불변성 유지, 신규 메모리 주소로 값 할당 - 이 경우 v-once 가 적용된 컴포넌트에서는 값 변경안됨
       this.item = {
         ...this.item,
         count: this.item.count + 1,
       };
     },
-    setChangeItemMessage() {
-      this.item = {
+    onClickChangeItemMessage() {
+      // 불변성 유지, 신규 메모리 주소로 값 할당 - 이 경우 v-once 가 적용된 컴포넌트에서는 값 변경안됨
+      /*this.item = {
         ...this.item,
         message: `item-message-${Math.random()}`,
-      };
+      };*/
+      // 불변성을 유지하지 않고 특정필드의 값만 변경
+      this.item.message = `item-message-${Math.random()}`;
     },
-    setChangeMessage() {
+    onClickChangeMessage() {
       this.message = `message-${Math.random()}`;
     },
     // props 로 함수를 넘기고, 정상 실행되는지 여부? 가능하다!
     onClick(presentationalText) {
       this.containerText = presentationalText;
-      console.log(
-        '하위 컴포넌트에서 넘겨준 메시지(데이터)',
-        presentationalText,
-      );
+      console.log('하위 컴포넌트에서 실행한 함수', presentationalText);
     },
   },
 };

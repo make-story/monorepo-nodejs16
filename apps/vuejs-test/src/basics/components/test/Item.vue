@@ -8,8 +8,8 @@
     <ul>
       <li><button @click="onClickContainer">onClickContainer</button></li>
       <li>
-        <button @click="onClickContainerDataChange">
-          onClickContainerDataChange
+        <button @click="onClickContainerChangeItemCount">
+          onClickContainerChangeItemCount
         </button>
       </li>
     </ul>
@@ -21,7 +21,7 @@
  * 최상위 컴포넌트, 상위 컴포넌트간 테스트
  */
 export default {
-  name: 'Presentational',
+  name: 'Item',
   components: {},
   props: {
     item: {
@@ -64,10 +64,12 @@ export default {
   methods: {
     // 상위 컴포넌트에서 함수를 props 로 넘겨주고, 하위 컴포넌트에서 호출하여, 상위컴포넌트로 데이터 전달되는지 여부? 변경된다!
     onClickContainer() {
-      this.onClick('최상위 컨테이너야 메시지(데이터) 받아라!');
+      this.onClick(
+        '최상위 컨테이너야 메시지(데이터) 받아라! - Item 컴포넌트에서 실행',
+      );
     },
     // props 로 받은 객체타입 데이터 변경시, 상위 컴포넌트에도 반영되는지 여부? 변경된다!
-    onClickContainerDataChange() {
+    onClickContainerChangeItemCount() {
       this.item.count = this.item.count + 1;
     },
   },

@@ -10,11 +10,33 @@
  */
 import path from 'path';
 //const { defineConfig } = require('@vue/cli-service');
-import { defineConfig } from '@vue/cli-service';
+import { defineConfig } from '@vue/cli-service'; // 설정을 도와주는 인텔리센스 (자동완성 같은 것)
 
 const __dirname = path.resolve();
 
 export default defineConfig({
+  /*pages: {
+    default: {
+      entry: 'src/main.js',
+      template: 'public/index.html',
+      filename: 'index.html',
+      title: 'Main Page',
+    },
+    admin: {
+      entry: 'src/admin/main.js',
+      template: 'public/admin.html',
+      filename: 'admin.html',
+      title: 'Admin Page',
+      chunks: ['admin', 'chunk-vendors'],
+    },
+    user: {
+      entry: 'src/user/main.js',
+      template: 'public/user.html',
+      filename: 'user.html',
+      title: 'User Page',
+      chunks: ['user', 'chunk-vendors', 'chunk-lodash'],
+    },
+  },*/
   // transpileDependencies
   // babel-loader과 관련된 항목으로 babel-loader는 default로 node_modules 하위에 있는 항목들은 처리를 하지 않는데 transpileDependencies 항목으로 지정된 경우에는 처리를 해주게 됩니다.
   transpileDependencies: true,
