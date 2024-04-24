@@ -40,7 +40,11 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      itemCount: this.item?.count,
+      itemMessage: this.item?.message,
+      itemData: `${this.item?.count} / ${this.item?.message}`,
+    };
   },
   computed: {
     // 객체(Object, {}) 값이 변경되면, 반영되는지 확인? 변경되면 반영된다!
@@ -57,7 +61,38 @@ export default {
       return this.message;
     },
   },
-  watch: {},
+  watch: {
+    computedItemCount: function () {
+      console.log('computedItemCount 값 변경 감지!!');
+    },
+    computedItemMessage: function () {
+      console.log('computedItemMessage 값 변경 감지!!');
+    },
+    // 객체 불변성에 따른 감지(watch) 테스트
+    // <Item :item="item" /> 경우, 불변성 여부 상관없이 상위 컴포넌트에서 객체 변경시 props 로 넘겨받은 하위 컴포넌트 무조건 영향 받음
+    // <Item v-once :item="item" /> 경우, 불변성으로 객체 변경했을 경우 props 로 넘겨받은 하위 컴포넌트 영향 없음
+    item: {
+      //immediate: true, // 컴포넌트가 생성되자마자 즉시 실행
+      deep: true, // data가 object(=배열 또는 객체)인 경우 object 내부의 값이 변경될때 watch가 감지 가능
+      handler(value, oldValue) {
+        console.log('item 값 변경 감지!!', value);
+      },
+    },
+    itemCount: {
+      //immediate: true, // 컴포넌트가 생성되자마자 즉시 실행
+      //deep: true, // data가 object(=배열 또는 객체)인 경우 object 내부의 값이 변경될때 watch가 감지 가능
+      handler(value, oldValue) {
+        console.log('itemCount 값 변경 감지!!', value);
+      },
+    },
+    itemMessage: {
+      //immediate: true, // 컴포넌트가 생성되자마자 즉시 실행
+      //deep: true, // data가 object(=배열 또는 객체)인 경우 object 내부의 값이 변경될때 watch가 감지 가능
+      handler(value, oldValue) {
+        console.log('itemMessage 값 변경 감지!!', value);
+      },
+    },
+  },
   created() {},
   mounted() {},
   destroyed() {},
