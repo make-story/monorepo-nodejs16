@@ -20,6 +20,8 @@
 /**
  * 최상위 컴포넌트, 상위 컴포넌트간 테스트
  */
+import Temp from './Temp';
+
 export default {
   name: 'Item',
   components: {},
