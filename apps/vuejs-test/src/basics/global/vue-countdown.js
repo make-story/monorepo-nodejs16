@@ -16,6 +16,7 @@ const EVENT_PROGRESS = 'progress';
 const EVENT_START = 'start';
 const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
+// Vue.component 를 이용해 컴포넌트를 전역으로 등록
 export default Vue.component('vue-countdown', {
   name: 'VueCountdown',
   props: {

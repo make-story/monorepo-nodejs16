@@ -1,6 +1,7 @@
 <template>
   <div>
     <button @click="onClick">Click Button</button>
+    <div><slot></slot></div>
   </div>
 </template>
 

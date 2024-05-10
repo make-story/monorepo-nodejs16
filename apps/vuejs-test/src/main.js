@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 import './assets/css/index.css';
 import App from './App.vue';
-import { basicTest, vuexTest } from './basics';
+import { basicTest, vuexTest } from './basics/index';
 
 Vue.config.productionTip = false;
 const eventBus = (Vue.prototype.EventBus = new Vue());

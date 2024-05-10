@@ -1,9 +1,8 @@
 <template>
   <!-- @buttonClick="" 속성은 컴포넌트 내부 $emit("buttonClick") 이벤트 수신 -->
-  <TestComponent
-    @buttonClick="$emit('goLinkPage')"
-    @click.prevent="onClick"
-  ></TestComponent>
+  <TestComponent @buttonClick="$emit('goLinkPage')" @click.prevent="onClick">
+    <slot></slot>
+  </TestComponent>
 </template>
 
 <script>

@@ -18,13 +18,14 @@ import Mixin from './mixin-component';
 import Property from './property';
 import Props from './props';
 //import {} from './reactivity';
-import SingleFileComponent from './SingleFileComponent';
+import SingleFileComponent from './components/SingleFileComponent';
 import Slot from './slot';
 //import {} from './template';
 import Countdown from './components/countdown/Countdown';
+import DDay from './components/countdown/DDay';
 import Container from './components/test/Container';
 
-import { store as moduleStore } from './store/store';
+import { store as moduleStore } from './store/index';
 import { store as singleStore } from './vuex-store';
 import VuexHelper from './vuex-helper';
 
@@ -36,9 +37,15 @@ export const basicTest = {
   template: `
     <div class="group-line">
       <div>
+        <h1>DDay 테스트</h1>
+        <dday></dday>
+      </div>
+      <div>
+        <h1>Container 테스트</h1>
         <Container></Container>
       </div>
       <div>
+        <h1>Container 테스트</h1>
         <countdown></countdown>
       </div>
       <div>
@@ -148,6 +155,7 @@ export const basicTest = {
     'dynamic-component': DynamicComponent,
     'mixin-component': Mixin,
     countdown: Countdown,
+    dday: DDay,
     'vuex-helper': VuexHelper,
   },
   created() {

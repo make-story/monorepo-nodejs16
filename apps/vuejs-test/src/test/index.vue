@@ -1,17 +1,17 @@
 <template>
-  <TestContainer></TestContainer>
+  <TestContainer>slot 값!!</TestContainer>
 </template>
 
 <script>
 /**
  *
  */
-import TestContainer from "@/test/containers/TestContainer";
+import TestContainer from '@/test/containers/TestContainer';
 
 export default {
-  name: "TestIndex",
+  name: 'TestIndex',
   components: {
-    TestContainer
+    TestContainer,
   },
   props: {},
   data() {
@@ -22,7 +22,7 @@ export default {
   created() {},
   mounted() {},
   destroyed() {},
-  methods: {}
+  methods: {},
 };
 </script>
 
