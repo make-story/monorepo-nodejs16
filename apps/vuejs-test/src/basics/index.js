@@ -41,12 +41,12 @@ export const basicTest = {
         <dday></dday>
       </div>
       <div>
-        <h1>Container 테스트</h1>
-        <Container></Container>
+        <h1>CountdownHelper 테스트</h1>
+        <countdown></countdown>
       </div>
       <div>
         <h1>Container 테스트</h1>
-        <countdown></countdown>
+        <Container></Container>
       </div>
       <div>
         <h1>Lifecycle 테스트</h1>
@@ -161,7 +161,10 @@ export const basicTest = {
   created() {
     // vuex 스토어 테스트
     this.$store.commit('products/increment', 1);
-    console.log(this.$store.getters['products/getTest']?.data);
+    console.log(
+      'products/getTest',
+      this.$store.getters['products/getTest']?.data,
+    );
   },
   methods: {
     // 커스텀 이벤트 테스트
