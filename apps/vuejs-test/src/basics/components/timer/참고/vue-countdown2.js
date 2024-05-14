@@ -1,10 +1,10 @@
 /**
- * vue countdown
+ * vue-countdown - 2.x
  * https://github.com/fengyuanchen/vue-countdown/blob/main/src/index.ts
  * https://fengyuanchen.github.io/vue-countdown/
  * https://joshua1988.github.io/vue-camp/reuse/v-slot.html#v-slot-%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB-%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC-%E1%84%87%E1%85%A1%E1%86%BC%E1%84%87%E1%85%A5%E1%86%B8
  */
-import { defineComponent, h } from 'vue';
+import Vue from 'vue';
 
 const MILLISECONDS_SECOND = 1000;
 const MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
@@ -16,9 +16,9 @@ const EVENT_PROGRESS = 'progress';
 const EVENT_START = 'start';
 const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
-export default defineComponent({
+// Vue.component 를 이용해 컴포넌트를 전역으로 등록
+export default Vue.component('vue-countdown', {
   name: 'VueCountdown',
-
   props: {
     /**
      * Starts the countdown automatically when initialized.
@@ -47,6 +47,7 @@ export default defineComponent({
 
     /**
      * Generate the current time of a specific time zone.
+     * 예: 1707958513664 밀리초(milliseconds)
      */
     now: {
       type: Function,
@@ -80,7 +81,6 @@ export default defineComponent({
   },
 
   emits: [EVENT_ABORT, EVENT_END, EVENT_PROGRESS, EVENT_START],
-
   data() {
     return {
       /**
@@ -88,6 +88,7 @@ export default defineComponent({
        * @type {boolean}
        */
       counting: false,
+      execution: 0,
 
       /**
        * The absolute end time.
@@ -108,7 +109,6 @@ export default defineComponent({
       requestId: 0,
     };
   },
-
   computed: {
     /**
      * Remaining days.
@@ -392,6 +392,7 @@ export default defineComponent({
     update() {
       if (this.counting) {
         this.totalMilliseconds = Math.max(0, this.endTime - this.now());
+        this.execution += 1;
       }
     },
 
@@ -426,28 +427,24 @@ export default defineComponent({
       }
     },
   },
-
-  render() {
-    return h(
-      this.tag,
-      this.$slots.default
-        ? [
-            this.$slots.default(
-              this.transform({
-                days: this.days,
-                hours: this.hours,
-                minutes: this.minutes,
-                seconds: this.seconds,
-                milliseconds: this.milliseconds,
-                totalDays: this.totalDays,
-                totalHours: this.totalHours,
-                totalMinutes: this.totalMinutes,
-                totalSeconds: this.totalSeconds,
-                totalMilliseconds: this.totalMilliseconds,
-              }),
-            ),
-          ]
-        : undefined,
-    );
+  render(createElement) {
+    // 하위컴포넌트 <slot name="default"></slot>
+    // 상위컴포넌트 v-slot:default=""
+    return createElement(this.tag, [
+      this.$scopedSlots.default(
+        this.transform({
+          days: this.days,
+          hours: this.hours,
+          minutes: this.minutes,
+          seconds: this.seconds,
+          milliseconds: this.milliseconds,
+          totalDays: this.totalDays,
+          totalHours: this.totalHours,
+          totalMinutes: this.totalMinutes,
+          totalSeconds: this.totalSeconds,
+          totalMilliseconds: this.totalMilliseconds,
+        }),
+      ),
+    ]);
   },
 });

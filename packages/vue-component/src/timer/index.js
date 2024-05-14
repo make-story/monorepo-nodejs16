@@ -1,13 +1,11 @@
-<template>
-  <div>
-    <p>
-      D-Day {{ padTo2Digits(days) }} {{ padTo2Digits(hours) }}:{{
-        padTo2Digits(minutes)
-      }}:{{ padTo2Digits(seconds) }}:{{ padTo2Digits(milliseconds) }}
-    </p>
-  </div>
-</template>
-<script>
+/**
+ * vue timer
+ * https://github.com/fengyuanchen/vue-countdown/blob/main/src/index.ts
+ * https://fengyuanchen.github.io/vue-countdown/
+ * https://joshua1988.github.io/vue-camp/reuse/v-slot.html#v-slot-%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB-%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC-%E1%84%87%E1%85%A1%E1%86%BC%E1%84%87%E1%85%A5%E1%86%B8
+ */
+import Vue from 'vue';
+
 const MILLISECONDS_SECOND = 1000; // 1000 = 1초 (밀리초 값이기 때문에 1000)
 const MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND; // 1초 * 60 = 1분
 const MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE; // 60초(1분) * 60 = 1시간
@@ -46,69 +44,53 @@ const getDateInstanceConvertFormat = (timestamp = Date.now()) => {
   }
 };
 
-/**
- * 'yyyyMMddHHmmss' 날짜 포맷 > new Date 변환
- */
-const getConvertDateInstance = yyyyMMddHHmmss => {
-  const stringParseInt = text => parseInt(text || 0, 10); // '00' > 0 변환
-  if (typeof yyyyMMddHHmmss === 'string' && 8 <= yyyyMMddHHmmss.length) {
-    return new Date(
-      ...[
-        yyyyMMddHHmmss.substring(0, 4),
-        yyyyMMddHHmmss.substring(4, 6) - 1, // 월은 0부터 시작하므로 1을 빼줍니다.
-        yyyyMMddHHmmss.substring(6, 8),
-        yyyyMMddHHmmss.substring(8, 10),
-        yyyyMMddHHmmss.substring(10, 12),
-        yyyyMMddHHmmss.substring(12, 14),
-      ].map(stringParseInt),
-    );
-  } else {
-    return new Date();
-  }
-};
+export default Vue.component('vue-timer', {
+  name: 'VueTimer',
 
-export default {
-  name: 'DDay',
-  components: {},
   props: {
     // console.log 출력 여부 (디버깅용)
     isDebug: {
       type: Boolean,
-      default: true,
+      default: false,
     },
-    // 시작시간 기준값?
-    startTimestamp: {
-      type: Number,
-      default: 0,
-      validator: value => 0 <= value,
+    // 감싸는 태그
+    tag: {
+      type: String,
+      default: 'span',
     },
     // 현재 시간 (서버 시간) - 밀리 초
     serverTimestamp: {
       type: Number,
       default: 0,
-      //default: new Date('2024-05-16T13:00:00+09:00').getTime(),
-      validator: value => 0 <= value,
+      //default: new Date('2024-05-15T14:00:00+09:00').getTime(),
     },
-    // 카운트다운 타겟 시간 - 밀리 초
+    // 타이머 타겟 시간 - 밀리 초
     targetTimestamp: {
       type: Number,
       default: 0,
       //default: new Date('2024-05-15T14:00:00+09:00').getTime(),
-      //default: getConvertDateInstance('20240513160000').getTime(),
       validator: value => 0 <= value,
     },
+    // 타임값 형태 수정 가능한 콜백
+    transform: {
+      type: Function,
+      default: props => props,
+    },
   },
+
   emits: [EVENT_END, EVENT_START],
+
   data() {
     return {
       isCounting: false,
-      totalMilliseconds: 0, // totalMilliseconds 값으로 카운트다운 실행여부 판단가능 (0보다 크다면 카운트다운 남은상태)
+      totalMilliseconds: 0, // totalMilliseconds 값으로 타이머 실행여부 판단가능 (0보다 크다면 타이머 남은상태)
       interval: 1000,
       intervalCode: 0,
       isDeviceTime: false,
       correctionTimestamp: 0,
     };
   },
+
   computed: {
     days() {
       return Math.floor(this.totalMilliseconds / MILLISECONDS_DAY);
@@ -144,6 +126,7 @@ export default {
       return Math.floor(this.totalMilliseconds / MILLISECONDS_SECOND);
     },
   },
+
   watch: {
     $props: {
       deep: true,
@@ -182,18 +165,19 @@ export default {
             getDateInstanceConvertFormat(this.correctionTimestamp),
           );
         }
-        this.update(); // 화면에 현재 계산된 카운트다운 정보 출력을 위해 start 전 update 실행
+        this.update(); // 화면에 현재 계산된 타이머 정보 출력을 위해 start 전 update 실행
         this.start();
       },
     },
   },
-  created() {},
+
   mounted() {
     document.addEventListener(
       EVENT_VISIBILITY_CHANGE,
       this.handleVisibilityChange,
     );
   },
+
   beforeUnmount() {
     document.removeEventListener(
       EVENT_VISIBILITY_CHANGE,
@@ -201,14 +185,15 @@ export default {
     );
     this.pause();
   },
+
   methods: {
     // 타이머 시작
     start() {
       if (this.isCounting) {
-        // 이미 카운트다운 시작된 상태
+        // 이미 타이머 시작된 상태
         return;
       }
-      this.isCounting = true; // 카운트다운 시작 (상태값 변경)
+      this.isCounting = true; // 타이머 시작 (상태값 변경)
       if (document.visibilityState === 'visible') {
         this.continue();
       }
@@ -217,7 +202,7 @@ export default {
     // 타이머 진행
     continue() {
       if (!this.isCounting) {
-        // 이미 카운트다운 종료된 상태
+        // 이미 타이머 종료된 상태
         return;
       }
       this.intervalCode = setInterval(() => {
@@ -277,13 +262,13 @@ export default {
     // 타이머 종료
     end() {
       if (!this.isCounting) {
-        // 이미 카운트다운 종료된 상태
+        // 이미 타이머 종료된 상태
         return;
       }
 
       this.pause();
       this.totalMilliseconds = 0;
-      this.isCounting = false; // 카운트다운 종료 (상태값 변경)
+      this.isCounting = false; // 타이머 종료 (상태값 변경)
       this.$emit(EVENT_END);
     },
     // 디바이스 시간 반환
@@ -311,11 +296,30 @@ export default {
       }
     },
     // 노출시간 '0' -> '00'
-    padTo2Digits(value) {
-      return value.toString().padStart(2, '0');
+    padTo2Digits(num) {
+      return num.toString().padStart(2, '0');
     },
   },
-};
-</script>
 
-<style lang="scss" scoped></style>
+  render(createElement) {
+    // 하위컴포넌트 <slot name="default"></slot>
+    // 상위컴포넌트 v-slot:default=""
+    // TODO: this.$scopedSlots 유효성검사 필요! v-slot 속성이 없을 수 있음
+    return createElement(this.tag, [
+      this.$scopedSlots.default(
+        this.transform({
+          days: this.days,
+          hours: this.hours,
+          minutes: this.minutes,
+          seconds: this.seconds,
+          milliseconds: this.milliseconds,
+          totalDays: this.totalDays,
+          totalHours: this.totalHours,
+          totalMinutes: this.totalMinutes,
+          totalSeconds: this.totalSeconds,
+          totalMilliseconds: this.totalMilliseconds,
+        }),
+      ),
+    ]);
+  },
+});

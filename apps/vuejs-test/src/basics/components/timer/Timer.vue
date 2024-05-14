@@ -1,21 +1,21 @@
 <template>
   <div>
-    <countdown-helper
+    <Timer
       :serverTimestamp="serverTimestamp"
       :targetTimestamp="targetTimestamp"
       :transform="transformSlotProps"
       v-slot="{ days, hours, minutes, seconds }"
     >
       Time Remaining {{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
-      {{ seconds }} seconds.</countdown-helper
+      {{ seconds }} seconds.</Timer
     >
   </div>
 </template>
 <script>
 /**
- * 'CountdownHelper' 사용 테스트
+ * 'vue-timer' 사용 테스트
  */
-import { CountdownHelper } from '@makestory/vue-helper/index'; // monorepo-nodejs16.git/packages/vue-helper
+import { Timer } from '@makestory/vue-component/index'; // monorepo-nodejs16.git/packages/vue-component
 
 /**
  * 'yyyyMMddHHmmss' 날짜 포맷 > new Date 변환
@@ -39,9 +39,9 @@ const getConvertDateInstance = yyyyMMddHHmmss => {
 };
 
 export default {
-  name: 'Countdown',
+  name: 'TestTimer',
   components: {
-    CountdownHelper,
+    Timer,
   },
   props: {
     serverTimestamp: {

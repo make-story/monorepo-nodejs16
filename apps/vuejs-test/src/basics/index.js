@@ -21,8 +21,8 @@ import Props from './props';
 import SingleFileComponent from './components/SingleFileComponent';
 import Slot from './slot';
 //import {} from './template';
-import Countdown from './components/countdown/Countdown';
-import DDay from './components/countdown/DDay';
+import Timer from './components/timer/Timer';
+import DDay from './components/timer/DDay';
 import Container from './components/test/Container';
 
 import { store as moduleStore } from './store/index';
@@ -41,8 +41,8 @@ export const basicTest = {
         <dday></dday>
       </div>
       <div>
-        <h1>CountdownHelper 테스트</h1>
-        <countdown></countdown>
+        <h1>Timer 테스트</h1>
+        <timer></timer>
       </div>
       <div>
         <h1>Container 테스트</h1>
@@ -154,7 +154,7 @@ export const basicTest = {
     'async-component': AsyncComponent,
     'dynamic-component': DynamicComponent,
     'mixin-component': Mixin,
-    countdown: Countdown,
+    timer: Timer,
     dday: DDay,
     'vuex-helper': VuexHelper,
   },

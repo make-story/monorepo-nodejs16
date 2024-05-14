@@ -1,5 +1,5 @@
 {
-  "name": "@makestory/vue-helper",
+  "name": "@makestory/vue-component",
   "version": "0.0.1",
   "type": "module",
   "main": "index.js",
