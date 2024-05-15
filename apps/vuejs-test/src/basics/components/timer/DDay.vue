@@ -203,13 +203,14 @@ export default {
         return;
       }
       this.isCounting = true; // 타이머 시작 (상태값 변경)
+      // 주의! 사용자가 타이머가 동작하는 브라우저 탭을 보고 있을 때 실행됨
       if (document.visibilityState === 'visible') {
-        this.continue();
+        this.execute();
       }
       this.$emit(EVENT_START);
     },
     // 타이머 진행
-    continue() {
+    execute() {
       if (!this.isCounting) {
         // 이미 타이머 종료된 상태
         return;
@@ -296,7 +297,7 @@ export default {
       switch (document.visibilityState) {
         case 'visible':
           this.update();
-          this.continue();
+          this.execute();
           break;
 
         case 'hidden':
