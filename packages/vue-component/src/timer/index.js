@@ -83,7 +83,7 @@ export default Vue.component('vue-timer', {
   data() {
     return {
       isCounting: false,
-      totalMilliseconds: 0, // totalMilliseconds 값으로 타이머 실행여부 판단가능 (0보다 크다면 타이머 남은상태)
+      totalMilliseconds: 0, // 주의! 초단위가 0이라도 밀리세컨드 값은 0이 아닐 수 있음
       interval: 1000,
       intervalCode: 0,
       isDeviceTime: false,

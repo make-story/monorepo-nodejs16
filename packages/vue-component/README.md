@@ -1,30 +1,30 @@
-# Vue 개발을 도와주는 Helper
+# Vue 개발을 도와주는 컴포넌트
 
-## countdown-helper
+## vue-timer
 
-카운트다운 컴포넌트
+타이머 컴포넌트
 
 Example
 
 ```vue
 <template>
   <div>
-    <countdown-helper
+    <Timer
       :targetTimestamp="targetTimestamp"
       v-slot="{ days, hours, minutes, seconds }"
     >
       Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
-      {{ seconds }} seconds.</countdown-helper
+      {{ seconds }} seconds.</Timer
     >
   </div>
 </template>
 <script>
-import { CountdownHelper } from '@makestory/vue-helper/index';
+import { Timer } from '@makestory/vue-component/index';
 
 export default {
-  name: 'Countdown',
+  name: 'VueTimer',
   components: {
-    CountdownHelper,
+    Timer,
   },
   props: {
     serverTimestamp: {

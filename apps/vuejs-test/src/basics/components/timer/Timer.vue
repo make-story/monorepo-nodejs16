@@ -51,8 +51,8 @@ export default {
     targetTimestamp: {
       type: Number,
       //default: Date.now(),
-      //default: new Date('2024-05-15T14:00:00+09:00').getTime(),
-      default: getConvertDateInstance('20240513160500').getTime(),
+      default: new Date('2024-05-15T16:40:00+09:00').getTime(),
+      //default: getConvertDateInstance('20240513160500').getTime(),
     },
   },
   data() {
