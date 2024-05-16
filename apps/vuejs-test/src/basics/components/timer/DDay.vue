@@ -19,7 +19,7 @@ const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 /**
  * timestamp > 사람이 인지 가능한 날짜포맷 (디버깅용)
  */
-const getDateInstanceConvertFormat = (timestamp = Date.now()) => {
+const getTimestampDebug = (timestamp = Date.now()) => {
   const padTo2Digits = value => {
     return value.toString().padStart(2, '0');
   };
@@ -161,19 +161,19 @@ export default {
             this.$options?.name,
             '목표 날짜/시간',
             this.targetTimestamp,
-            getDateInstanceConvertFormat(this.targetTimestamp),
+            getTimestampDebug(this.targetTimestamp),
           );
           console.log(
             this.$options?.name,
             '서버 날짜/시간',
             this.serverTimestamp,
-            getDateInstanceConvertFormat(this.serverTimestamp),
+            getTimestampDebug(this.serverTimestamp),
           );
           console.log(
             this.$options?.name,
             '디바이스 날짜/시간',
             this.correctionTimestamp,
-            getDateInstanceConvertFormat(this.correctionTimestamp),
+            getTimestampDebug(this.correctionTimestamp),
           );
         }
         this.update(); // 화면에 현재 계산된 타이머 정보 출력을 위해 start 전 update 실행
