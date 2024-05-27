@@ -1,9 +1,9 @@
-// Vue 생명 주기 훅
-/*
-method, computed, watch 내용은  
-"property.js" 파일 참고  
-*/
-
+/**
+ * Vue 생명 주기 훅 - Options / Lifecycle Hooks
+ * https://v2.vuejs.org/v2/api/#Options-Lifecycle-Hooks
+ *
+ * method, computed, watch 내용은 "property.js" 파일 참고
+ */
 //import Vue from 'vue';
 
 export default {
@@ -40,6 +40,10 @@ export default {
   updated() {
     // data 변경에 따라 DOM이 업데이트 되었을 경우
     console.log('업데이트 후 이벤트');
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been re-rendered
+    });
   },
   beforeDestroy() {
     console.log('소멸 전 이벤트');
