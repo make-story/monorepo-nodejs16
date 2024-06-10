@@ -2,15 +2,12 @@
   <div id="app">
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <Test />
-    <div v-if="toggleCheck">{{ toggleCheck }}</div>
-    <button @click="setToggle">Toggle</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/basics/components/HelloWorld.vue';
+import HelloWorld from '@/HelloWorld.vue';
 import Test from '@/test/index.vue';
-import '@/basics/style/test.css';
 
 export default {
   name: 'App',
@@ -19,21 +16,11 @@ export default {
     Test,
   },
   data() {
-    return {
-      isToggle: true,
-    };
+    return {};
   },
-  computed: {
-    toggleCheck() {
-      return this.isToggle;
-    },
-  },
+  computed: {},
   mounted() {},
-  methods: {
-    setToggle() {
-      this.isToggle = !this.isToggle;
-    },
-  },
+  methods: {},
 };
 </script>
 

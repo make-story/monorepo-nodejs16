@@ -35,6 +35,7 @@
     "nextjs13": "yarn workspace @ysm/nextjs13",
     "server-graphql": "yarn workspace @ysm/server-graphql",
     "vuejs-test": "yarn workspace @ysm/vuejs-test",
+    "dummy": "yarn workspace @ysm/dummy",
     "local": "concurrently \"yarn server-graphql server\" \"yarn cra-server start\" \"yarn cra-client start\""
   },
   "dependencies": {

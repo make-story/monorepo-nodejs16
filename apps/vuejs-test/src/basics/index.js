@@ -5,6 +5,8 @@ https://kr.vuejs.org/v2/style-guide/index.html
 */
 //import { mapGetters } from 'vuex';
 
+import '@/basics/style/test.css';
+
 import AsyncComponent from './async-component';
 import CustomDirective from './custom-directive';
 import CustomEvent from './custom-event';

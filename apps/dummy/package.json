@@ -1,0 +1,20 @@
+{
+  "name": "@ysm/dummy",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('use Yarn, no NPM')\"",
+    "dev": "cross-env NODE_ENV=${NODE_ENV:=development} node --inspect=9191 server.js"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "16.14.2"
+  }
+}

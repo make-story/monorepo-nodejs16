@@ -51,9 +51,7 @@ function convertHeicToJpg() {
 
 export default {
   name: 'Image',
-  components: {
-    HelloWorld,
-  },
+  components: {},
   data() {
     return {};
   },
