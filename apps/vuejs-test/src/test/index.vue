@@ -1,5 +1,8 @@
 <template>
-  <TestContainer>slot 값!!</TestContainer>
+  <div>
+    <TestContainer>slot 값!!</TestContainer>
+    <Todo></Todo>
+  </div>
 </template>
 
 <script>
@@ -7,11 +10,13 @@
  *
  */
 import TestContainer from '@/test/containers/TestContainer';
+import Todo from '@/test/containers/Todo';
 
 export default {
   name: 'TestIndex',
   components: {
     TestContainer,
+    Todo,
   },
   props: {},
   data() {
