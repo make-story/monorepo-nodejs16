@@ -15,7 +15,8 @@
     "nohoist": [
       "**/nextjs-micro/**",
       "**/nextjs12/**",
-      "**/nextjs13/**"
+      "**/nextjs13/**",
+      "**/vuejs-test/**"
     ]
   },
   "scripts": {
