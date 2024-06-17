@@ -2,9 +2,11 @@
   <div>
     <div class="dummy">
       TEST
-      <template v-for="(item, index) in responseData">
-        <Unit :key="index" :item="item"></Unit>
-      </template>
+      <Unit
+        v-for="(item, index) in responseData"
+        :key="`${index}`"
+        :item="item"
+      ></Unit>
     </div>
     <PagingObserver @pagingAction="pagingAction"></PagingObserver>
   </div>
@@ -75,21 +77,26 @@ export default {
         // 데이터 호출 (dummy 서버)
         (async () => {
           this.isLoading = true;
-          const response = await fetch('http://localhost:9090/list', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json',
-              //'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({ mallCdList: [], productInfoList: list }),
-          });
-          const date = await response.json();
-          // Vue 배열 감지
-          // https://v2.ko.vuejs.org/v2/guide/list.html#%EB%B0%B0%EC%97%B4-%EB%8C%80%EC%B2%B4
-          this.responseData = this.responseData.concat(
-            date?.productInfoList || [],
-          );
+          try {
+            // monorepo-nodejs16.git/apps/dummy/server.js
+            const response = await fetch('http://localhost:9090/list', {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json',
+                //'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: JSON.stringify({ mallCdList: [], productInfoList: list }),
+            });
+            const date = await response.json();
+            // Vue 배열 감지
+            // https://v2.ko.vuejs.org/v2/guide/list.html#%EB%B0%B0%EC%97%B4-%EB%8C%80%EC%B2%B4
+            this.responseData = this.responseData.concat(
+              date?.productInfoList || [],
+            );
+          } catch (error) {
+            console.error(error);
+          }
           this.isLoading = false;
         })();
       }
